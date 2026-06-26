@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sequel Sports — Product Catalogue 2025</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E42;
+    --navy-light: #243B55;
+    --gold: #C9A84C;
+    --gold-light: #E8C96C;
+    --gold-pale: #F5E9C0;
+    --cream: #FAF7F0;
+    --white: #FFFFFF;
+    --text-dark: #0D1B2A;
+    --text-mid: #3A4F63;
+    --text-muted: #6B7E8F;
+    --page-w: 900px;
+    --page-h: 600px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0A1520;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  /* ─── TOP BAR ─── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,21,32,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 32px;
+  }
+  .topbar-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 20px; letter-spacing: 3px;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(201,168,76,0.5), 0 0 40px rgba(201,168,76,0.2);
+  }
+  .topbar-info {
+    color: rgba(255,255,255,0.5);
+    font-size: 12px; letter-spacing: 1px;
+  }
+  .page-counter {
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--gold); font-size: 14px; font-weight: 600;
+  }
+
+  /* ─── BOOK CONTAINER ─── */
+  .book-scene {
+    perspective: 2500px;
+    width: var(--page-w);
+    height: var(--page-h);
+    position: relative;
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+
+  .book {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  /* ─── PAGES ─── */
+  .page {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    display: none;
+    overflow: hidden;
+    border-radius: 0 4px 4px 0;
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.5),
+      4px 0 20px rgba(0,0,0,0.3),
+      inset -1px 0 0 rgba(255,255,255,0.05);
+  }
+  .page.active {
+    display: block;
+    animation: pageReveal 0.15s ease-out;
+  }
+  .page.flip-out {
+    display: block;
+    animation: flipOut 0.35s ease-in forwards;
+  }
+  .page.flip-in {
+    display: block;
+    animation: flipIn 0.35s ease-out forwards;
+  }
+
+  @keyframes pageReveal {
+    from { opacity:0; transform: perspective(1000px) rotateY(-8deg); }
+    to   { opacity:1; transform: perspective(1000px) rotateY(0deg); }
+  }
+  @keyframes flipOut {
+    from { transform: perspective(1200px) rotateY(0deg); opacity:1; }
+    50%  { transform: perspective(1200px) rotateY(-90deg); opacity:0.6; }
+    to   { transform: perspective(1200px) rotateY(-180deg); opacity:0; }
+  }
+  @keyframes flipIn {
+    from { transform: perspective(1200px) rotateY(180deg); opacity:0; }
+    50%  { transform: perspective(1200px) rotateY(90deg); opacity:0.6; }
+    to   { transform: perspective(1200px) rotateY(0deg); opacity:1; }
+  }
+
+  /* ─── BOOK SPINE SHADOW ─── */
+  .book-spine {
+    position: absolute;
+    left: -8px; top: 2px; bottom: 2px; width: 8px;
+    background: linear-gradient(to right, #020608, #0D1B2A);
+    border-radius: 2px 0 0 2px;
+    box-shadow: -4px 0 16px rgba(0,0,0,0.6);
+    z-index: 10;
+  }
+
+  /* ─── NAVIGATION ─── */
+  .nav-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,21,32,0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    display: flex; align-items: center; justify-content: center;
+    gap: 0;
+    padding: 10px 0;
+  }
+  .nav-btn {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    transition: color 0.2s;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-btn:last-child { border-right: none; }
+  .nav-btn:hover { color: var(--gold); }
+  .nav-btn.active { color: var(--gold); }
+  .nav-arrow {
+    background: none; border: 1px solid rgba(201,168,76,0.4); cursor: pointer;
+    color: var(--gold); font-size: 18px; padding: 6px 20px;
+    border-radius: 3px;
+    transition: all 0.2s;
+    margin: 0 20px;
+  }
+  .nav-arrow:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(201,168,76,0.3);
+  }
+  .nav-divider {
+    width: 1px; height: 24px;
+    background: rgba(255,255,255,0.08);
+    margin: 0 4px;
+  }
+
+  /* ======================================================
+     SLIDE DESIGNS
+  ====================================================== */
+
+  /* ─── SLIDE 1: COVER ─── */
+  .slide-cover {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-cover::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -20%;
+    width: 140%; height: 200%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 60%, rgba(13,91,156,0.2) 0%, transparent 50%);
+  }
+  .cover-grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .cover-content {
+    position: relative; z-index: 2;
+    height: 100%;
+    display: flex; flex-direction: column;
+    padding: 0;
+  }
+  .cover-top-strip {
+    background: var(--gold);
+    height: 4px;
+    width: 100%;
+  }
+  .cover-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 40px 60px;
+    gap: 40px;
+  }
+  .cover-left {}
+  .cover-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 4px;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .cover-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    line-height: 0.9;
+    margin-bottom: 20px;
+  }
+  .cover-brand .sequel {
+    display: block; font-size: 72px; letter-spacing: 6px;
+    color: var(--white);
+    text-shadow: 0 0 30px rgba(201,168,76,0.15);
+  }
+  .cover-brand .sports {
+    display: block; font-size: 72px; letter-spacing: 6px;
+    color: var(--gold);
+    text-shadow:
+      0 0 20px rgba(201,168,76,0.6),
+      0 0 40px rgba(201,168,76,0.3),
+      0 0 80px rgba(201,168,76,0.15);
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.6), 0 0 40px rgba(201,168,76,0.3), 0 0 80px rgba(201,168,76,0.15); }
+    50%       { text-shadow: 0 0 30px rgba(201,168,76,0.9), 0 0 60px rgba(201,168,76,0.5), 0 0 100px rgba(201,168,76,0.25); }
+  }
+  .cover-subtitle {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400;
+    letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cover-divider-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-bottom: 20px;
+  }
+  .cover-product-list {
+    font-family: 'Inter', sans-serif; font-size: 11px;
+    color: rgba(255,255,255,0.35); letter-spacing: 1.5px;
+    line-height: 1.8;
+  }
+  .cover-right {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 24px;
+  }
+  .cover-badge {
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 20px 24px;
+    text-align: center;
+    background: rgba(201,168,76,0.04);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 30px rgba(201,168,76,0.08);
+  }
+  .cover-badge .big {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px; font-weight: 900; color: var(--gold);
+    text-shadow: 0 0 20px rgba(201,168,76,0.4);
+    line-height: 1;
+    display: block;
+  }
+  .cover-badge .label {
+    font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; display: block; margin-top: 4px;
+  }
+  .cover-year-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 3px;
+    color: rgba(255,255,255,0.6);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 8px 0; text-align: right;
+    width: 100%;
+  }
+  .cover-location {
+    font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 1.5px;
+    text-align: right;
+  }
+  .cover-bottom {
+    background: rgba(201,168,76,0.06);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 12px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cover-bottom-text {
+    font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+  .cover-web {
+    font-size: 10px; letter-spacing: 1px; color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* ─── SLIDE 2: TABLE OF CONTENTS ─── */
+  .slide-toc {
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .toc-sidebar {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 220px;
+    background: var(--navy);
+    display: flex; flex-direction: column;
+    padding: 40px 32px;
+    justify-content: space-between;
+  }
+  .toc-sidebar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--white); line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .toc-sidebar-subtitle {
+    font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.3);
+    text-transform: uppercase; line-height: 1.6;
+  }
+  .toc-sidebar-gold-line {
+    height: 2px; background: var(--gold);
+    box-shadow: 0 0 10px rgba(201,168,76,0.5);
+    margin: 20px 0;
+    width: 40px;
+  }
+  .toc-sidebar-stats {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .toc-stat-item {}
+  .toc-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 900; color: var(--gold);
+    text-shadow: 0 0 12px rgba(201,168,76,0.4);
+    line-height: 1;
+  }
+  .toc-stat-label {
+    font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .toc-content {
+    margin-left: 220px;
+    padding: 36px 40px;
+    height: 100%;
+  }
+  .toc-eyebrow {
+    font-size: 10px; letter-spacing: 3px; color: var(--gold);
+    text-transform: uppercase; font-weight: 600; margin-bottom: 8px;
+  }
+  .toc-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--navy); margin-bottom: 24px;
+    font-style: italic;
+  }
+  .toc-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+  }
+  .toc-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(13,27,42,0.08);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .toc-item:hover .toc-item-num { color: var(--navy); }
+  .toc-item:hover .toc-item-title { color: var(--gold); }
+  .toc-item-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700; color: var(--gold);
+    min-width: 28px; line-height: 1;
+    transition: color 0.2s;
+  }
+  .toc-item-title {
+    font-size: 13px; font-weight: 600; color: var(--navy);
+    transition: color 0.2s;
+    line-height: 1.2;
+  }
+  .toc-item-sub {
+    font-size: 10px; color: var(--text-muted); margin-top: 1px;
+  }
+
+  /* ─── SLIDE 3: ABOUT ─── */
+  .slide-about {
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .about-left {
+    padding: 50px 48px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; z-index: 2;
+  }
+  .about-right {
+    background: linear-gradient(135deg, #1A2E42 0%, #0D1B2A 100%);
+    padding: 48px 44px;
+    position: relative;
+  }
+  .about-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.06) 0%, transparent 60%);
+  }
+  .about-eyebrow {
+    font-size: 10px; letter-spacing: 3px; color: var(--gold);
+    text-transform: uppercase; font-weight: 600; margin-bottom: 16px;
+  }
+  .about-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; line-height: 1.05; color: var(--white);
+    margin-bottom: 20px;
+  }
+  .about-heading em { color: var(--gold); font-style: italic; }
+  .about-story {
+    font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.6);
+    margin-bottom: 28px;
+  }
+  .about-stats-row {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  .about-stat-box {
+    padding: 16px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.04);
+  }
+  .about-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px; font-weight: 900; color: var(--gold);
+    text-shadow: 0 0 16px rgba(201,168,76,0.4);
+    line-height: 1;
+  }
+  .about-stat-label {
+    font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 1px;
+    text-transform: uppercase; margin-top: 2px;
+  }
+  .about-pillars {
+    display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 2;
+  }
+  .pillar {
+    padding: 18px 20px;
+    border-left: 2px solid var(--gold);
+    background: rgba(255,255,255,0.03);
+  }
+  .pillar-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--gold);
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .pillar-text {
+    font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6;
+  }
+  .sialkot-badge {
+    position: relative; z-index: 2;
+    margin-top: 20px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 12px 16px;
+    font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.5;
+  }
+  .sialkot-badge strong { color: var(--gold); }
+
+  /* ─── PRODUCT CATEGORY SLIDES ─── */
+  .slide-product {
+    background: var(--white);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .product-header {
+    background: var(--navy);
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .product-category-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .product-category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--white);
+    line-height: 1.1;
+  }
+  .product-category-title em { color: var(--gold); font-style: italic; }
+  .product-header-right {
+    text-align: right;
+  }
+  .product-sub-cats {
+    font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 1px;
+    max-width: 280px; text-align: right; line-height: 1.6;
+  }
+  .product-body {
+    flex: 1; padding: 28px 48px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px 20px;
+    background: var(--cream);
+  }
+  .product-card {
+    background: var(--white);
+    padding: 18px 18px;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(13,27,42,0.06);
+    transition: all 0.2s;
+  }
+  .product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(13,27,42,0.12);
+  }
+  .product-card-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--navy);
+    letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .product-card-desc {
+    font-size: 11px; color: var(--text-muted); line-height: 1.7;
+  }
+  .product-card-desc li {
+    list-style: none; padding: 1px 0;
+  }
+  .product-card-desc li::before {
+    content: '—'; margin-right: 5px; color: var(--gold); font-size: 9px;
+  }
+  .product-footer {
+    background: var(--navy);
+    padding: 10px 48px;
+    font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 1.5px;
+    display: flex; justify-content: space-between;
+  }
+
+  /* ─── CUSTOMISATION SLIDE ─── */
+  .slide-custom {
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .custom-left {
+    padding: 50px 48px;
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .custom-left::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%);
+  }
+  .custom-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; color: var(--white); line-height: 1.05;
+    margin-bottom: 8px; position: relative; z-index: 2;
+  }
+  .custom-heading em { color: var(--gold); font-style: italic; }
+  .custom-sub {
+    font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7;
+    margin-bottom: 28px; position: relative; z-index: 2;
+  }
+  .custom-features {
+    display: flex; flex-direction: column; gap: 14px;
+    position: relative; z-index: 2;
+  }
+  .custom-feature {
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .custom-feature-icon {
+    width: 32px; height: 32px; flex-shrink: 0;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 0 10px rgba(201,168,76,0.1);
+  }
+  .custom-feature-title {
+    font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 1px;
+  }
+  .custom-feature-desc {
+    font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.5;
+  }
+  .custom-right {
+    background: var(--cream);
+    padding: 50px 44px;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 0;
+  }
+  .custom-process-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: var(--navy); text-transform: uppercase; margin-bottom: 20px;
+  }
+  .process-step {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(13,27,42,0.08);
+  }
+  .process-step:last-child { border-bottom: none; }
+  .process-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 900; color: var(--gold);
+    line-height: 1; min-width: 28px;
+    text-shadow: 0 0 12px rgba(201,168,76,0.3);
+  }
+  .process-title {
+    font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 2px;
+  }
+  .process-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .custom-moq-bar {
+    margin-top: 16px;
+    background: var(--navy); padding: 12px 16px;
+    font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 1px;
+    line-height: 1.7;
+  }
+  .custom-moq-bar strong { color: var(--gold); }
+
+  /* ─── PRICING SLIDE ─── */
+  .slide-pricing {
+    background: var(--cream);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .pricing-header {
+    background: var(--navy); padding: 22px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .pricing-header-left .eyebrow {
+    font-size: 10px; letter-spacing: 3px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .pricing-header-left .title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; color: var(--white);
+  }
+  .pricing-header-right {
+    font-size: 10px; color: rgba(255,255,255,0.3);
+    text-align: right; letter-spacing: 1px;
+    line-height: 1.7;
+  }
+  .pricing-table-wrap {
+    flex: 1; padding: 20px 32px;
+    overflow: hidden;
+  }
+  .pricing-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 12px;
+  }
+  .pricing-table thead tr {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+  }
+  .pricing-table th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 9px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .pricing-table td {
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(13,27,42,0.07);
+    color: var(--text-dark); font-size: 12px;
+    white-space: nowrap;
+  }
+  .pricing-table tbody tr:nth-child(even) td {
+    background: rgba(13,27,42,0.03);
+  }
+  .pricing-table .td-cat {
+    font-weight: 600; color: var(--navy);
+  }
+  .pricing-table .td-price {
+    color: var(--gold); font-weight: 700;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+  }
+  .pricing-note {
+    background: var(--navy); padding: 10px 32px;
+    font-size: 10px; color: rgba(255,255,255,0.25);
+    letter-spacing: 0.5px; line-height: 1.6;
+  }
+  .pricing-note strong { color: var(--gold); }
+
+  /* ─── WHY US SLIDE ─── */
+  .slide-why {
+    background: var(--white);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .why-header {
+    background: var(--navy); padding: 22px 48px;
+  }
+  .why-eyebrow {
+    font-size: 10px; letter-spacing: 3px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .why-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--white);
+  }
+  .why-subhead {
+    font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px;
+  }
+  .why-grid {
+    flex: 1; padding: 28px 48px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    background: var(--cream);
+  }
+  .why-card {
+    background: var(--white);
+    padding: 22px 20px;
+    box-shadow: 0 2px 12px rgba(13,27,42,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .why-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+  }
+  .why-card:hover::after { transform: scaleX(1); }
+  .why-card-icon {
+    font-size: 24px; margin-bottom: 10px; display: block;
+  }
+  .why-card-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px; font-weight: 900; color: rgba(13,27,42,0.06);
+    position: absolute; right: 14px; top: 12px; line-height: 1;
+  }
+  .why-card-title {
+    font-size: 14px; font-weight: 700; color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .why-card-desc {
+    font-size: 11px; color: var(--text-muted); line-height: 1.7;
+  }
+  .why-bottom {
+    background: var(--navy); padding: 12px 48px;
+    display: flex; justify-content: center; align-items: center; gap: 40px;
+  }
+  .why-bottom-item {
+    font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .why-bottom-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--gold);
+    box-shadow: 0 0 6px rgba(201,168,76,0.5);
+  }
+
+  /* ─── CONTACT SLIDE ─── */
+  .slide-contact {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .contact-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(13,91,156,0.15) 0%, transparent 50%);
+  }
+  .contact-grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .contact-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 40px 80px;
+    width: 100%;
+  }
+  .contact-eyebrow {
+    font-size: 10px; letter-spacing: 4px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 16px; opacity: 0.8;
+  }
+  .contact-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; color: var(--white); margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .contact-heading em { color: var(--gold); font-style: italic; }
+  .contact-subhead {
+    font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .contact-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-bottom: 28px;
+  }
+  .contact-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 18px 14px;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s;
+  }
+  .contact-card:hover {
+    background: rgba(201,168,76,0.06);
+    border-color: rgba(201,168,76,0.4);
+    box-shadow: 0 0 20px rgba(201,168,76,0.1);
+  }
+  .contact-card-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+  .contact-card-label {
+    font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,0.3);
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .contact-card-value {
+    font-size: 12px; font-weight: 600; color: var(--white);
+    word-break: break-all;
+  }
+  .contact-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px; font-style: italic;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 20px; line-height: 1.7;
+  }
+  .contact-brand-final {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 700; letter-spacing: 6px;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(201,168,76,0.5), 0 0 40px rgba(201,168,76,0.2);
+    text-transform: uppercase;
+  }
+  .contact-top-bar { background: var(--gold); height: 3px; width: 100%; }
+
+  /* ─── MISSION SLIDE (NEW) ─── */
+  .slide-mission {
+    background: var(--cream);
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+  }
+  .mission-header {
+    background: var(--navy);
+    padding: 22px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .mission-header-left .eyebrow {
+    font-size: 10px; letter-spacing: 3px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .mission-header-left .title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; color: var(--white);
+  }
+  .mission-body {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    padding: 0;
+  }
+  .mission-col-left {
+    padding: 36px 48px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .mission-col-right {
+    background: var(--navy);
+    padding: 36px 44px;
+    display: flex; flex-direction: column; gap: 18px;
+    position: relative;
+  }
+  .mission-col-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 30%, rgba(201,168,76,0.06) 0%, transparent 60%);
+  }
+  .mission-block {
+    border-left: 3px solid var(--gold);
+    padding: 16px 18px;
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(13,27,42,0.06);
+  }
+  .mission-block-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--navy);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .mission-block-text {
+    font-size: 12px; color: var(--text-muted); line-height: 1.7;
+  }
+  .value-item {
+    position: relative; z-index: 2;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .value-item:last-child { border-bottom: none; }
+  .value-icon {
+    width: 28px; height: 28px; flex-shrink: 0;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .value-title {
+    font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 2px;
+  }
+  .value-text {
+    font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.5;
+  }
+  .mission-footer {
+    background: var(--navy); padding: 10px 48px;
+    font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 1px;
+    text-align: center;
+  }
+
+  /* ─── GENERAL HELPERS ─── */
+  .gold-line {
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 12px 0;
+  }
+
+  /* ─── AUDIO STATUS ─── */
+  .audio-status {
+    position: fixed; right: 20px; bottom: 56px; z-index: 999;
+    background: rgba(10,21,32,0.8);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: rgba(255,255,255,0.4);
+    font-size: 10px; padding: 5px 10px;
+    border-radius: 3px; letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .audio-status:hover { color: var(--gold); border-color: rgba(201,168,76,0.5); }
+
+  /* Scroll indicator on first page */
+  .page-number-badge {
+    position: absolute; bottom: 48px; right: 48px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 60px; font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    line-height: 1; user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">SEQUEL SPORTS</div>
+  <div class="topbar-info">GLOBAL SPORTSWEAR SOLUTIONS · SIALKOT, PAKISTAN</div>
+  <div class="page-counter" id="pageCounter">Page 1 of 10</div>
+</div>
+
+<!-- BOOK -->
+<div class="book-scene">
+  <div class="book-spine"></div>
+  <div class="book" id="book">
+
+    <!-- ══════════════════════════════════
+         PAGE 1: COVER
+    ══════════════════════════════════ -->
+    <div class="page active" data-page="1">
+      <div class="slide-cover">
+        <div class="cover-grid-lines"></div>
+        <div class="cover-content">
+          <div class="cover-top-strip"></div>
+          <div class="cover-main">
+            <div class="cover-left">
+              <div class="cover-tagline">Global Sportswear Solutions</div>
+              <div class="cover-brand">
+                <span class="sequel">SEQUEL</span>
+                <span class="sports">SPORTS</span>
+              </div>
+              <div class="cover-subtitle">Sialkot, Pakistan · Est. 2015</div>
+              <div class="cover-divider-line"></div>
+              <div class="cover-product-list">
+                Caps &amp; Headwear · Jerseys · Shorts<br>
+                Tracksuits · Hoodies · Socks · Gloves<br>
+                OEM &amp; Private Label Manufacturing
+              </div>
+            </div>
+            <div class="cover-right">
+              <div class="cover-year-tag">PRODUCT CATALOGUE · 2025</div>
+              <div class="cover-badge">
+                <span class="big">30+</span>
+                <span class="label">Countries Served</span>
+              </div>
+              <div class="cover-badge">
+                <span class="big">50+</span>
+                <span class="label">Product Categories</span>
+              </div>
+              <div class="cover-location">sequelsports.com<br>info@sequelsports.com</div>
+            </div>
+          </div>
+          <div class="cover-bottom">
+            <div class="cover-bottom-text">For Trade Use Only · FOB Sialkot</div>
+            <div class="cover-web">sequelsports.com</div>
+          </div>
+        </div>
+        <div class="page-number-badge">01</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 2: TABLE OF CONTENTS
+    ══════════════════════════════════ -->
+    <div class="page" data-page="2">
+      <div class="slide-toc">
+        <div class="toc-sidebar">
+          <div>
+            <div class="toc-sidebar-title">Inside This Catalogue</div>
+            <div class="toc-sidebar-gold-line"></div>
+            <div class="toc-sidebar-subtitle">A complete range of premium sportswear — manufactured in Sialkot, Pakistan's global export hub.</div>
+          </div>
+          <div class="toc-sidebar-stats">
+            <div class="toc-stat-item">
+              <div class="toc-stat-num">10+</div>
+              <div class="toc-stat-label">Years Export</div>
+            </div>
+            <div class="toc-stat-item">
+              <div class="toc-stat-num">100%</div>
+              <div class="toc-stat-label">Quality Checked</div>
+            </div>
+            <div class="toc-stat-item">
+              <div class="toc-stat-num">30+</div>
+              <div class="toc-stat-label">Countries</div>
+            </div>
+          </div>
+        </div>
+        <div class="toc-content">
+          <div class="toc-eyebrow">What We Offer</div>
+          <div class="toc-heading">Navigate our collection</div>
+          <div class="toc-grid">
+            <div class="toc-item" onclick="goToPage(3)">
+              <div class="toc-item-num">01</div>
+              <div>
+                <div class="toc-item-title">Company Profile & Mission</div>
+                <div class="toc-item-sub">Our story, values & standards</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(4)">
+              <div class="toc-item-num">02</div>
+              <div>
+                <div class="toc-item-title">Headwear</div>
+                <div class="toc-item-sub">Caps, beanies, bucket hats</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(5)">
+              <div class="toc-item-num">03</div>
+              <div>
+                <div class="toc-item-title">Jerseys & Tops</div>
+                <div class="toc-item-sub">Football, cricket, training</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(6)">
+              <div class="toc-item-num">04</div>
+              <div>
+                <div class="toc-item-title">Shorts & Bottoms</div>
+                <div class="toc-item-sub">Sports shorts, track pants</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(7)">
+              <div class="toc-item-num">05</div>
+              <div>
+                <div class="toc-item-title">Tracksuits & Sets</div>
+                <div class="toc-item-sub">Full training sets</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(8)">
+              <div class="toc-item-num">06</div>
+              <div>
+                <div class="toc-item-title">Hoodies & Sweatshirts</div>
+                <div class="toc-item-sub">Fleece, performance, streetwear</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(9)">
+              <div class="toc-item-num">07</div>
+              <div>
+                <div class="toc-item-title">Socks & Accessories</div>
+                <div class="toc-item-sub">Socks, gloves, bags</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(10)">
+              <div class="toc-item-num">08</div>
+              <div>
+                <div class="toc-item-title">OEM & Customisation</div>
+                <div class="toc-item-sub">Private label, branding</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(11)">
+              <div class="toc-item-num">09</div>
+              <div>
+                <div class="toc-item-title">Pricing & MOQ</div>
+                <div class="toc-item-sub">Factory pricing, lead times</div>
+              </div>
+            </div>
+            <div class="toc-item" onclick="goToPage(12)">
+              <div class="toc-item-num">10</div>
+              <div>
+                <div class="toc-item-title">Why Sequel Sports</div>
+                <div class="toc-item-sub">Our advantages</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-number-badge" style="color:rgba(13,27,42,0.04)">02</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 3: MISSION / VALUES
+    ══════════════════════════════════ -->
+    <div class="page" data-page="3">
+      <div class="slide-mission">
+        <div class="mission-header">
+          <div class="mission-header-left">
+            <div class="eyebrow">Company Profile</div>
+            <div class="title">Our Mission, Vision & Values</div>
+          </div>
+        </div>
+        <div class="mission-body">
+          <div class="mission-col-left">
+            <div class="mission-block">
+              <div class="mission-block-title">Our Mission</div>
+              <div class="mission-block-text">To deliver world-class sportswear at competitive prices by leveraging Sialkot's unmatched manufacturing ecosystem — making premium products accessible to brands worldwide.</div>
+            </div>
+            <div class="mission-block">
+              <div class="mission-block-title">Our Vision</div>
+              <div class="mission-block-text">To become the most trusted sourcing partner for sportswear brands and retailers across Europe, North America, and beyond — known for reliability, quality, and transparency.</div>
+            </div>
+            <div class="mission-block">
+              <div class="mission-block-title">Our Promise</div>
+              <div class="mission-block-text">Transparent pricing. Consistent quality. On-time delivery. Dedicated communication. Every single order — no exceptions.</div>
+            </div>
+            <div class="mission-block">
+              <div class="mission-block-title">Why Pakistan?</div>
+              <div class="mission-block-text">Sialkot is globally renowned for sportswear manufacturing — home to suppliers for FIFA, Adidas, Nike and major global brands. Your products, same world-class ecosystem.</div>
+            </div>
+          </div>
+          <div class="mission-col-right">
+            <div style="position:relative;z-index:2;margin-bottom:4px;">
+              <div style="font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;">Core Values</div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">⚡</div>
+              <div>
+                <div class="value-title">Speed &amp; Reliability</div>
+                <div class="value-text">Realistic lead times quoted upfront. We meet every deadline and communicate proactively when challenges arise.</div>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🔍</div>
+              <div>
+                <div class="value-title">Radical Transparency</div>
+                <div class="value-text">Pre-shipment QC photos, factory reports, and open communication on pricing. No hidden fees, no surprises.</div>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🏆</div>
+              <div>
+                <div class="value-title">Uncompromising Quality</div>
+                <div class="value-text">Every shipment QC-checked against buyer specs. We reject products that don't meet our standards before they reach you.</div>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🤝</div>
+              <div>
+                <div class="value-title">Partnership First</div>
+                <div class="value-text">We build long-term relationships. Your growth is our growth. We work in your timezone, language, and business culture.</div>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">♻️</div>
+              <div>
+                <div class="value-title">Ethical Sourcing</div>
+                <div class="value-text">All partner factories operate under compliant labour practices and internationally recognised ethical manufacturing standards.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mission-footer">SEQUEL SPORTS · SIALKOT, PAKISTAN · EST. 2015</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 4: HEADWEAR
+    ══════════════════════════════════ -->
+    <div class="page" data-page="4">
+      <div class="slide-product">
+        <div class="product-header">
+          <div>
+            <div class="product-category-num">Category 01 — Headwear</div>
+            <div class="product-category-title"><em>Caps</em> &amp; Beanies</div>
+          </div>
+          <div class="product-header-right">
+            <div class="product-sub-cats">5-Panel · 6-Panel · Snapback · Trucker · Dad Cap · Flex Fit · Beanies · Bucket Hats</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-card">
+            <div class="product-card-name">5-Panel Caps</div>
+            <ul class="product-card-desc">
+              <li>Structured / unstructured crown</li>
+              <li>Cotton, polyester, mesh</li>
+              <li>Embroidered or printed branding</li>
+              <li>MOQ: 50 pcs per design</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">6-Panel Caps</div>
+            <ul class="product-card-desc">
+              <li>Classic baseball profile</li>
+              <li>Wool blend, cotton twill, nylon</li>
+              <li>Curved or flat brim options</li>
+              <li>Velcro, snapback, or fitted</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Snapback Caps</div>
+            <ul class="product-card-desc">
+              <li>Flat brim with snap closure</li>
+              <li>Raised embroidery ready</li>
+              <li>High crown or low profile</li>
+              <li>Popular for streetwear & sports</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Trucker Caps</div>
+            <ul class="product-card-desc">
+              <li>Foam front, mesh back</li>
+              <li>Adjustable snapback</li>
+              <li>Screen print or embroidery</li>
+              <li>Breathable for outdoor sports</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Dad Caps</div>
+            <ul class="product-card-desc">
+              <li>Soft unstructured crown</li>
+              <li>Cotton canvas, washed styles</li>
+              <li>Metal buckle or velcro closure</li>
+              <li>Minimalist & lifestyle branding</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Beanies & Bucket Hats</div>
+            <ul class="product-card-desc">
+              <li>Knit beanies — fold & no fold</li>
+              <li>Pom-pom or plain top</li>
+              <li>Bucket hats — cotton & nylon</li>
+              <li>100% custom colourways</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-footer">
+          <span>SEQUEL SPORTS · HEADWEAR COLLECTION</span>
+          <span>MOQ from 50 pcs · Custom colours, logo & sizing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 5: JERSEYS
+    ══════════════════════════════════ -->
+    <div class="page" data-page="5">
+      <div class="slide-product">
+        <div class="product-header">
+          <div>
+            <div class="product-category-num">Category 02 — Performance Tops</div>
+            <div class="product-category-title"><em>Jerseys</em> &amp; Tops</div>
+          </div>
+          <div class="product-header-right">
+            <div class="product-sub-cats">Football · Cricket · Basketball · Rugby · Training Tees · Polo Shirts</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-card">
+            <div class="product-card-name">Football Jerseys</div>
+            <ul class="product-card-desc">
+              <li>Sublimation all-over print</li>
+              <li>Breathable micro-mesh fabric</li>
+              <li>Player name & number printing</li>
+              <li>Club & national team styles</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Cricket Jerseys</div>
+            <ul class="product-card-desc">
+              <li>ODI & Test match styles</li>
+              <li>Full polyester or cotton-poly</li>
+              <li>Sublimation & cut-&-sew options</li>
+              <li>ICC-compliant designs available</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Basketball Jerseys</div>
+            <ul class="product-card-desc">
+              <li>Mesh & dri-fit polyester</li>
+              <li>Sleeveless & short sleeve</li>
+              <li>Reversible options available</li>
+              <li>Number & name on front & back</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Rugby Jerseys</div>
+            <ul class="product-card-desc">
+              <li>Heavyweight polyester fabric</li>
+              <li>Reinforced collar stitching</li>
+              <li>Cut-&-sew panel construction</li>
+              <li>Traditional & modern colourways</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Training Tees</div>
+            <ul class="product-card-desc">
+              <li>Lightweight performance fabric</li>
+              <li>Round neck & V-neck options</li>
+              <li>Quick-dry moisture-wicking</li>
+              <li>Plain, printed, or embroidered</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Polo Shirts</div>
+            <ul class="product-card-desc">
+              <li>Piqué cotton & polyester blend</li>
+              <li>2 & 3 button placket</li>
+              <li>Embroidery-ready collar</li>
+              <li>Ideal for team & corporate wear</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-footer">
+          <span>SEQUEL SPORTS · JERSEY COLLECTION</span>
+          <span>MOQ from 50 pcs · Full sublimation available</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 6: SHORTS
+    ══════════════════════════════════ -->
+    <div class="page" data-page="6">
+      <div class="slide-product">
+        <div class="product-header">
+          <div>
+            <div class="product-category-num">Category 03 — Bottoms</div>
+            <div class="product-category-title"><em>Shorts</em> &amp; Bottoms</div>
+          </div>
+          <div class="product-header-right">
+            <div class="product-sub-cats">Sports Shorts · Track Pants · Compression Bottoms · Goalkeeper Pants</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-card">
+            <div class="product-card-name">Football Shorts</div>
+            <ul class="product-card-desc">
+              <li>Lightweight polyester</li>
+              <li>Elastic waistband + drawstring</li>
+              <li>Side pockets option</li>
+              <li>Sublimation or cut-&-sew</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Basketball Shorts</div>
+            <ul class="product-card-desc">
+              <li>Longer inseam, baggy cut</li>
+              <li>Mesh inner liner available</li>
+              <li>Matching jersey sets</li>
+              <li>Custom length & waistband</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Running Shorts</div>
+            <ul class="product-card-desc">
+              <li>2-in-1 liner option</li>
+              <li>Lightweight moisture-wicking</li>
+              <li>Reflective detailing option</li>
+              <li>Split hem or regular hem</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Compression Shorts</div>
+            <ul class="product-card-desc">
+              <li>Nylon-spandex blend</li>
+              <li>Muscle support & recovery</li>
+              <li>Under-short or standalone</li>
+              <li>Short & 3/4 length options</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Track Pants</div>
+            <ul class="product-card-desc">
+              <li>Polyester tricot or fleece lining</li>
+              <li>Full-length zip at ankle</li>
+              <li>Elastic & drawstring waist</li>
+              <li>Two side zip pockets</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Goalkeeper Pants</div>
+            <ul class="product-card-desc">
+              <li>Padded knee inserts</li>
+              <li>Stretch polyester construction</li>
+              <li>Below-knee length</li>
+              <li>Matching GK set available</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-footer">
+          <span>SEQUEL SPORTS · BOTTOMS COLLECTION</span>
+          <span>MOQ from 50 pcs · Sizes XS–4XL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 7: TRACKSUITS
+    ══════════════════════════════════ -->
+    <div class="page" data-page="7">
+      <div class="slide-product">
+        <div class="product-header">
+          <div>
+            <div class="product-category-num">Category 04 — Training Sets</div>
+            <div class="product-category-title"><em>Tracksuits</em> &amp; Sets</div>
+          </div>
+          <div class="product-header-right">
+            <div class="product-sub-cats">Full Zip · Pullover · Slim Fit · Classic Cut · Sublimation & Cut-&-Sew</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-card">
+            <div class="product-card-name">Polyester Tricot</div>
+            <ul class="product-card-desc">
+              <li>Lightweight, shiny finish</li>
+              <li>Popular for team tracksuits</li>
+              <li>Full zip & pullover options</li>
+              <li>Full custom logos & numbers</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Fleece-Lined</div>
+            <ul class="product-card-desc">
+              <li>Warm inner fleece lining</li>
+              <li>Ideal for cold weather training</li>
+              <li>Ribbed cuffs & ankles</li>
+              <li>Premium club wear standard</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Softshell</div>
+            <ul class="product-card-desc">
+              <li>Wind & water resistant outer</li>
+              <li>Premium club wear look</li>
+              <li>Bonded interior lining</li>
+              <li>Professional team standard</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Micro-Fleece</div>
+            <ul class="product-card-desc">
+              <li>Ultra-soft, fast-dry fabric</li>
+              <li>Lifestyle & youth ranges</li>
+              <li>Anti-pilling treatment</li>
+              <li>Lightweight packable design</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Interlock Knit</div>
+            <ul class="product-card-desc">
+              <li>Two-layer construction</li>
+              <li>Durable & stretchy</li>
+              <li>Smooth inner face</li>
+              <li>Ideal for year-round wear</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Cotton Blend</div>
+            <ul class="product-card-desc">
+              <li>Natural comfort feel</li>
+              <li>Casual training & leisure</li>
+              <li>Brushed inner finish</li>
+              <li>Lifestyle & streetwear appeal</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-footer">
+          <span>SEQUEL SPORTS · TRACKSUIT COLLECTION</span>
+          <span>Available as top, bottom or full set · Sizes XS–4XL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 8: HOODIES
+    ══════════════════════════════════ -->
+    <div class="page" data-page="8">
+      <div class="slide-product">
+        <div class="product-header">
+          <div>
+            <div class="product-category-num">Category 05 — Outerwear</div>
+            <div class="product-category-title"><em>Hoodies</em> &amp; Sweatshirts</div>
+          </div>
+          <div class="product-header-right">
+            <div class="product-sub-cats">Pullover · Full-Zip · Cropped · Oversized · Performance · Streetwear</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-card">
+            <div class="product-card-name">Pullover Hoodie</div>
+            <ul class="product-card-desc">
+              <li>Double-lined hood + drawstring</li>
+              <li>Front kangaroo pocket</li>
+              <li>Fleece or cotton-poly blend</li>
+              <li>Embroidery & screen print ready</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Full-Zip Hoodie</div>
+            <ul class="product-card-desc">
+              <li>YKK or equivalent quality zip</li>
+              <li>Ribbed cuffs & hem</li>
+              <li>Side hand pockets</li>
+              <li>Perfect for warm-up & training</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Cropped Hoodie</div>
+            <ul class="product-card-desc">
+              <li>Above-waist cut</li>
+              <li>Popular women's & youth style</li>
+              <li>Custom crop length available</li>
+              <li>Oversized or fitted silhouette</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Oversized Hoodie</div>
+            <ul class="product-card-desc">
+              <li>Relaxed streetwear fit</li>
+              <li>Heavy-weight fleece options</li>
+              <li>Drop shoulder construction</li>
+              <li>Premium lifestyle branding</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Sweatshirt (Crew)</div>
+            <ul class="product-card-desc">
+              <li>Classic crewneck silhouette</li>
+              <li>Soft fleece or French terry</li>
+              <li>No hood — minimal & clean</li>
+              <li>Screen print or embroidery</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Performance Hoodie</div>
+            <ul class="product-card-desc">
+              <li>Lightweight moisture-wicking</li>
+              <li>Thumbholes in cuffs</li>
+              <li>Reflective accents option</li>
+              <li>Half-zip variant available</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-footer">
+          <span>SEQUEL SPORTS · HOODIE COLLECTION</span>
+          <span>MOQ from 50 pcs · All weights & fabric options</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 9: SOCKS & ACCESSORIES
+    ══════════════════════════════════ -->
+    <div class="page" data-page="9">
+      <div class="slide-product">
+        <div class="product-header">
+          <div>
+            <div class="product-category-num">Category 06 — Accessories</div>
+            <div class="product-category-title"><em>Socks</em> &amp; Accessories</div>
+          </div>
+          <div class="product-header-right">
+            <div class="product-sub-cats">Socks · Gloves · Wristbands · Shin Guards · Bags · Bottles</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-card">
+            <div class="product-card-name">Football Socks</div>
+            <ul class="product-card-desc">
+              <li>Knee-high ribbed socks</li>
+              <li>Cushioned sole & heel</li>
+              <li>Cotton-nylon-spandex blend</li>
+              <li>Team colours, striped or plain</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Sports Ankle Socks</div>
+            <ul class="product-card-desc">
+              <li>Low-cut athletic profile</li>
+              <li>Arch compression support</li>
+              <li>Moisture-wicking fabric</li>
+              <li>Suitable for all sports</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Grip Socks</div>
+            <ul class="product-card-desc">
+              <li>Non-slip rubber grip pods</li>
+              <li>Football & basketball specific</li>
+              <li>Crew & ankle length</li>
+              <li>Hugely popular EU market</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Goalkeeper Gloves</div>
+            <ul class="product-card-desc">
+              <li>Latex palm for grip</li>
+              <li>Backhand foam protection</li>
+              <li>Finger spines available</li>
+              <li>Flat, roll & negative cut</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Wristbands & Sweat</div>
+            <ul class="product-card-desc">
+              <li>Terry cotton wristbands</li>
+              <li>Headbands available</li>
+              <li>Custom woven logo</li>
+              <li>Matching set with socks</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-card-name">Kit Bags & Bottles</div>
+            <ul class="product-card-desc">
+              <li>Drawstring & holdall bags</li>
+              <li>600D polyester construction</li>
+              <li>BPA-free water bottles</li>
+              <li>Custom logo print</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-footer">
+          <span>SEQUEL SPORTS · ACCESSORIES COLLECTION</span>
+          <span>MOQ from 50–100 pairs/units · Full custom branding</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 10: CUSTOMISATION / OEM
+    ══════════════════════════════════ -->
+    <div class="page" data-page="10">
+      <div class="slide-custom">
+        <div class="custom-left">
+          <div>
+            <div style="font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:12px;position:relative;z-index:2;">OEM & Private Label</div>
+            <div class="custom-heading">Your <em>Brand.</em><br>Our Factory.</div>
+            <div class="custom-sub">Full OEM & Private Label manufacturing — your logo, colours, and packaging on every product. Completely white-label ready.</div>
+          </div>
+          <div class="custom-features">
+            <div class="custom-feature">
+              <div class="custom-feature-icon">✦</div>
+              <div>
+                <div class="custom-feature-title">Logo Branding</div>
+                <div class="custom-feature-desc">Embroidery, screen print, heat transfer, sublimation, woven labels, rubber patches</div>
+              </div>
+            </div>
+            <div class="custom-feature">
+              <div class="custom-feature-icon">🎨</div>
+              <div>
+                <div class="custom-feature-title">Custom Colourways</div>
+                <div class="custom-feature-desc">Pantone-matched colours across all fabrics — full custom cuts and panels</div>
+              </div>
+            </div>
+            <div class="custom-feature">
+              <div class="custom-feature-icon">🏷️</div>
+              <div>
+                <div class="custom-feature-title">Private Labelling</div>
+                <div class="custom-feature-desc">Your brand label sewn into every garment — complete white-label product</div>
+              </div>
+            </div>
+            <div class="custom-feature">
+              <div class="custom-feature-icon">📦</div>
+              <div>
+                <div class="custom-feature-title">Custom Packaging</div>
+                <div class="custom-feature-desc">Polybags, hangtags, boxes — branded with your artwork and barcode</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="custom-right">
+          <div class="custom-process-title">Order Process — 5 Steps</div>
+          <div class="process-step">
+            <div class="process-num">01</div>
+            <div>
+              <div class="process-title">Send Inquiry</div>
+              <div class="process-desc">Share product type, quantity & any reference designs</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-num">02</div>
+            <div>
+              <div class="process-title">Tech Pack / Sample</div>
+              <div class="process-desc">We create a pre-production sample for your approval</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-num">03</div>
+            <div>
+              <div class="process-title">Confirm Order</div>
+              <div class="process-desc">Proforma invoice issued, deposit payment confirmed</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-num">04</div>
+            <div>
+              <div class="process-title">Production</div>
+              <div class="process-desc">Manufactured & quality control checked at factory</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-num">05</div>
+            <div>
+              <div class="process-title">Shipment</div>
+              <div class="process-desc">DHL, FedEx, or sea freight — delivered to your door</div>
+            </div>
+          </div>
+          <div class="custom-moq-bar">
+            <strong>MOQ:</strong> Caps & Headwear <strong>50 pcs</strong> · Jerseys & Shorts <strong>50 pcs</strong> · Socks <strong>100 pairs</strong> · Full Sets <strong>30 units</strong> · All MOQs negotiable for established buyers
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 11: PRICING
+    ══════════════════════════════════ -->
+    <div class="page" data-page="11">
+      <div class="slide-pricing">
+        <div class="pricing-header">
+          <div class="pricing-header-left">
+            <div class="eyebrow">Category 09 — Pricing</div>
+            <div class="title">Competitive Factory Pricing</div>
+          </div>
+          <div class="pricing-header-right">
+            All prices in USD · FOB Sialkot<br>
+            Final price based on fabric, quantity & customisation
+          </div>
+        </div>
+        <div class="pricing-table-wrap">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Product Category</th>
+                <th>MOQ</th>
+                <th>Price Range (USD)</th>
+                <th>Lead Time</th>
+                <th>Customisation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-cat">5 / 6 Panel Caps</td><td>50 pcs</td><td class="td-price">$3.50 – $8.00</td><td>25–35 days</td><td>Embroidery / Print</td></tr>
+              <tr><td class="td-cat">Snapback / Trucker Caps</td><td>50 pcs</td><td class="td-price">$4.00 – $9.50</td><td>25–35 days</td><td>Embroidery / Print</td></tr>
+              <tr><td class="td-cat">Beanies</td><td>100 pcs</td><td class="td-price">$2.50 – $6.00</td><td>20–30 days</td><td>Jacquard / Embroidery</td></tr>
+              <tr><td class="td-cat">Football Jerseys</td><td>50 pcs</td><td class="td-price">$5.00 – $12.00</td><td>30–45 days</td><td>Full Sublimation</td></tr>
+              <tr><td class="td-cat">Training Tees / Polo</td><td>50 pcs</td><td class="td-price">$4.50 – $9.00</td><td>25–35 days</td><td>Embroidery / Print</td></tr>
+              <tr><td class="td-cat">Tracksuits (Full Set)</td><td>30 sets</td><td class="td-price">$14.00 – $28.00</td><td>35–45 days</td><td>Custom Labels</td></tr>
+              <tr><td class="td-cat">Hoodies</td><td>50 pcs</td><td class="td-price">$10.00 – $20.00</td><td>30–40 days</td><td>Embroidery / Print</td></tr>
+              <tr><td class="td-cat">Sports Shorts</td><td>50 pcs</td><td class="td-price">$3.50 – $8.00</td><td>25–35 days</td><td>Sublimation / Print</td></tr>
+              <tr><td class="td-cat">Football / Grip Socks</td><td>100 pairs</td><td class="td-price">$1.50 – $4.50</td><td>20–30 days</td><td>Jacquard / Print</td></tr>
+              <tr><td class="td-cat">Goalkeeper Gloves</td><td>50 pairs</td><td class="td-price">$5.00 – $15.00</td><td>30–45 days</td><td>Custom Labels</td></tr>
+              <tr><td class="td-cat">Kit Bags</td><td>50 pcs</td><td class="td-price">$6.00 – $14.00</td><td>30–40 days</td><td>Screen Print / Embroidery</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pricing-note">
+          * Prices are indicative and subject to final confirmation based on exact specs, fabric selection & total order value. <strong>Sample orders accepted before bulk production.</strong> All prices FOB Sialkot, Pakistan.
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 12: WHY SEQUEL
+    ══════════════════════════════════ -->
+    <div class="page" data-page="12">
+      <div class="slide-why">
+        <div class="why-header">
+          <div class="why-eyebrow">Our Advantage</div>
+          <div class="why-heading">Why Buyers Choose Sequel Sports</div>
+          <div class="why-subhead">We make sourcing from Pakistan simple, transparent, and profitable for you.</div>
+        </div>
+        <div class="why-grid">
+          <div class="why-card">
+            <span class="why-card-num">1</span>
+            <span class="why-card-icon">🏭</span>
+            <div class="why-card-title">Factory-Direct Pricing</div>
+            <div class="why-card-desc">We work directly with Sialkot manufacturers, cutting out middlemen to give you better margins on every order.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card-num">2</span>
+            <span class="why-card-icon">✅</span>
+            <div class="why-card-title">Verified Quality</div>
+            <div class="why-card-desc">Every shipment undergoes quality inspection before dispatch. We share QC reports and photos before shipping.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card-num">3</span>
+            <span class="why-card-icon">🏷️</span>
+            <div class="why-card-title">Private Label Ready</div>
+            <div class="why-card-desc">Your brand, your labels. We handle all branding, packaging, and export documentation for seamless resale.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card-num">4</span>
+            <span class="why-card-icon">📦</span>
+            <div class="why-card-title">Small Run Friendly</div>
+            <div class="why-card-desc">Start with as few as 30–50 pieces. Ideal for new importers testing new styles or entering new markets.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card-num">5</span>
+            <span class="why-card-icon">🚢</span>
+            <div class="why-card-title">On-Time Delivery</div>
+            <div class="why-card-desc">Realistic lead times quoted upfront. We use DHL, FedEx, and sea freight with full tracking on every order.</div>
+          </div>
+          <div class="why-card">
+            <span class="why-card-num">6</span>
+            <span class="why-card-icon">💬</span>
+            <div class="why-card-title">Dedicated Communication</div>
+            <div class="why-card-desc">Single point of contact. Fast responses. WhatsApp, email, and video calls — we work in your timezone.</div>
+          </div>
+        </div>
+        <div class="why-bottom">
+          <div class="why-bottom-item"><div class="why-bottom-dot"></div>FOB Sialkot, Pakistan</div>
+          <div class="why-bottom-item"><div class="why-bottom-dot"></div>DHL · FedEx · Sea Freight</div>
+          <div class="why-bottom-item"><div class="why-bottom-dot"></div>Sample Orders Welcome</div>
+          <div class="why-bottom-item"><div class="why-bottom-dot"></div>24h Response Guarantee</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         PAGE 13: CONTACT
+    ══════════════════════════════════ -->
+    <div class="page" data-page="13">
+      <div class="slide-contact">
+        <div class="contact-bg"></div>
+        <div class="contact-grid-lines"></div>
+        <div class="contact-top-bar"></div>
+        <div class="contact-content">
+          <div class="contact-eyebrow">Start Your Order Today</div>
+          <div class="contact-heading">Get in Touch with<br><em>Sequel Sports</em></div>
+          <div class="contact-subhead">Send us your product requirements and we'll reply within 24 hours<br>with pricing and sample availability.</div>
+          <div class="contact-cards">
+            <div class="contact-card">
+              <span class="contact-card-icon">🌐</span>
+              <div class="contact-card-label">Website</div>
+              <div class="contact-card-value">sequelsports.com</div>
+            </div>
+            <div class="contact-card">
+              <span class="contact-card-icon">✉️</span>
+              <div class="contact-card-label">Email</div>
+              <div class="contact-card-value">info@sequelsports.com</div>
+            </div>
+            <div class="contact-card">
+              <span class="contact-card-icon">📱</span>
+              <div class="contact-card-label">WhatsApp</div>
+              <div class="contact-card-value">+92 320 628 6151</div>
+            </div>
+            <div class="contact-card">
+              <span class="contact-card-icon">📍</span>
+              <div class="contact-card-label">Location</div>
+              <div class="contact-card-value">Sialkot, Pakistan</div>
+            </div>
+          </div>
+          <div class="contact-tagline">
+            "Quality you can see. Prices you can profit from.<br>Reliability you can build a business on."
+          </div>
+          <div class="contact-brand-final">SEQUEL SPORTS — SIALKOT, PAKISTAN</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /book -->
+</div><!-- /book-scene -->
+
+<!-- NAVIGATION -->
+<div class="nav-bar">
+  <button class="nav-arrow" onclick="prevPage()">&#8592;</button>
+
+  <button class="nav-btn" onclick="goToPage(1)">Cover</button>
+  <button class="nav-btn" onclick="goToPage(2)">Contents</button>
+  <div class="nav-divider"></div>
+  <button class="nav-btn" onclick="goToPage(3)">Mission</button>
+  <button class="nav-btn" onclick="goToPage(4)">Headwear</button>
+  <button class="nav-btn" onclick="goToPage(5)">Jerseys</button>
+  <button class="nav-btn" onclick="goToPage(6)">Shorts</button>
+  <button class="nav-btn" onclick="goToPage(7)">Tracksuits</button>
+  <button class="nav-btn" onclick="goToPage(8)">Hoodies</button>
+  <button class="nav-btn" onclick="goToPage(9)">Accessories</button>
+  <div class="nav-divider"></div>
+  <button class="nav-btn" onclick="goToPage(10)">OEM</button>
+  <button class="nav-btn" onclick="goToPage(11)">Pricing</button>
+  <button class="nav-btn" onclick="goToPage(12)">Why Us</button>
+  <button class="nav-btn" onclick="goToPage(13)">Contact</button>
+
+  <button class="nav-arrow" onclick="nextPage()">&#8594;</button>
+</div>
+
+<!-- SOUND TOGGLE -->
+<div class="audio-status" id="audioToggle" onclick="toggleSound()">🔇 Sound Off</div>
+
+<!-- PAGE TURN SOUND via Web Audio API -->
+<script>
+  const TOTAL_PAGES = 13;
+  let currentPage = 1;
+  let isAnimating = false;
+  let soundEnabled = false;
+  let audioCtx = null;
+
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  function playPageTurn() {
+    if (!soundEnabled) return;
+    try {
+      const ctx = getAudioCtx();
+      // Layered page-turn sound
+      for (let i = 0; i < 3; i++) {
+        const buf = ctx.createBuffer(1, ctx.sampleRate * 0.12, ctx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let j = 0; j < data.length; j++) {
+          const env = Math.exp(-j / (data.length * 0.3)) * (1 - j / data.length);
+          data[j] = (Math.random() * 2 - 1) * env * 0.4;
+        }
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.5 - i * 0.1, ctx.currentTime + i * 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2 + i * 0.04);
+        const filt = ctx.createBiquadFilter();
+        filt.type = 'bandpass';
+        filt.frequency.value = 2000 + i * 800;
+        filt.Q.value = 0.8;
+        src.connect(filt);
+        filt.connect(gain);
+        gain.connect(ctx.destination);
+        src.start(ctx.currentTime + i * 0.04);
+      }
+    } catch(e) {}
+  }
+
+  function toggleSound() {
+    soundEnabled = !soundEnabled;
+    const btn = document.getElementById('audioToggle');
+    if (soundEnabled) {
+      btn.textContent = '🔊 Sound On';
+      btn.style.color = '#C9A84C';
+      // Resume if suspended
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      else getAudioCtx();
+    } else {
+      btn.textContent = '🔇 Sound Off';
+      btn.style.color = '';
+    }
+  }
+
+  function showPage(n) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => {
+      p.classList.remove('active', 'flip-out', 'flip-in');
+      p.style.display = 'none';
+    });
+    const target = document.querySelector(`.page[data-page="${n}"]`);
+    if (target) {
+      target.style.display = 'block';
+      target.classList.add('active');
+    }
+    currentPage = n;
+    updateCounter();
+    updateNavBtns();
+  }
+
+  function goToPage(n) {
+    if (n === currentPage || isAnimating) return;
+    isAnimating = true;
+    playPageTurn();
+
+    const oldPage = document.querySelector(`.page[data-page="${currentPage}"]`);
+    const newPage = document.querySelector(`.page[data-page="${n}"]`);
+
+    if (oldPage) {
+      oldPage.classList.remove('active');
+      oldPage.classList.add('flip-out');
+    }
+
+    setTimeout(() => {
+      if (oldPage) { oldPage.classList.remove('flip-out'); oldPage.style.display = 'none'; }
+      if (newPage) {
+        newPage.style.display = 'block';
+        newPage.classList.add('flip-in');
+      }
+      currentPage = n;
+      updateCounter();
+      updateNavBtns();
+    }, 180);
+
+    setTimeout(() => {
+      if (newPage) { newPage.classList.remove('flip-in'); newPage.classList.add('active'); }
+      isAnimating = false;
+    }, 380);
+  }
+
+  function nextPage() {
+    if (currentPage < TOTAL_PAGES) goToPage(currentPage + 1);
+  }
+  function prevPage() {
+    if (currentPage > 1) goToPage(currentPage - 1);
+  }
+
+  function updateCounter() {
+    document.getElementById('pageCounter').textContent = `Page ${currentPage} of ${TOTAL_PAGES}`;
+  }
+
+  function updateNavBtns() {
+    const pageMap = {1:'Cover',2:'Contents',3:'Mission',4:'Headwear',5:'Jerseys',6:'Shorts',7:'Tracksuits',8:'Hoodies',9:'Accessories',10:'OEM',11:'Pricing',12:'Why Us',13:'Contact'};
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.textContent === pageMap[currentPage]) btn.classList.add('active');
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextPage();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevPage();
+  });
+
+  // Swipe support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { if (diff > 0) nextPage(); else prevPage(); }
+  });
+
+  // Init
+  updateNavBtns();
+</script>
+</body>
+</html>
